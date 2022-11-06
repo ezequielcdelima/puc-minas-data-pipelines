@@ -57,7 +57,7 @@ def indicadores_aereos():
                         'InstanceCount': 1,
                     }
                 ],
-                'Ec2KeyName': None,
+                'Ec2KeyName': 'none',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
                 'Ec2SubnetId': 'subnet-0930242c8c582244d'
