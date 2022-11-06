@@ -74,3 +74,8 @@ df_ind_3 = (
     .format('parquet')
     .save('s3://puc-trabalho-final-processing-zone-104346215011/indicadores/indicador3')
 )
+
+
+df_ind_1.show()
+df_ind_2.show()
+df_ind_3.show()

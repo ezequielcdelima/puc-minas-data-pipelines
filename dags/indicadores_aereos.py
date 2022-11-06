@@ -30,14 +30,15 @@ def indicadores_aereos():
         print("Começou!!")
 
     # Cria um cluster EMR
+
     @task
     def emr_create_cluster():
         cluster_id = client.run_job_flow(
-            Name='Automated_EMR_Ney',
+            Name='Automated_EMR_Carlos_Ezequiel',
             ServiceRole='EMR_DefaultRole',
             JobFlowRole='EMR_EC2_DefaultRole',
             VisibleToAllUsers=True,
-            LogUri='s3://aws-logs-539445819060-us-east-1/elasticmapreduce/',
+            LogUri='s3://aws-logs-104346215011-us-east-1/elasticmapreduce/',
             ReleaseLabel='emr-6.8.0',
             Instances={
                 'InstanceGroups': [
@@ -56,16 +57,17 @@ def indicadores_aereos():
                         'InstanceCount': 1,
                     }
                 ],
-                'Ec2KeyName': 'ney-pucminas-testes',
+                # 'Ec2KeyName': 'ney-pucminas-testes',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
-                'Ec2SubnetId': 'subnet-09b06b5d8fc0d0062'
+                'Ec2SubnetId': 'subnet-0930242c8c582244d'
             },
 
             Applications=[{'Name': 'Spark'}, {'Name': 'Hive'}],
         )
         return cluster_id["JobFlowId"]
 
+    # espera o cluster esta de pé
     @task
     def wait_emr_cluster(cid: str):
         waiter = client.get_waiter('cluster_running')
@@ -78,6 +80,8 @@ def indicadores_aereos():
             }
         )
         return True
+
+    # joga o processamento para o EMR dos jobs spark
 
     @task
     def emr_process_aereos(cid: str):
@@ -113,6 +117,7 @@ def indicadores_aereos():
         )
         return newstep['StepIds'][0]
 
+    # espera o  step do job terminar
     @task
     def wait_emr_job(cid: str, stepId: str):
         waiter = client.get_waiter('step_complete')
@@ -148,7 +153,6 @@ def indicadores_aereos():
 
     terminacluster = terminate_emr_cluster(cluster)
     wait_step >> terminacluster >> fim
-    # ---------------
 
 
 execucao = indicadores_aereos()

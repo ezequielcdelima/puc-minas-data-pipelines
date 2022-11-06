@@ -34,3 +34,6 @@ df_final = (
     .format('parquet')
     .save('s3://puc-trabalho-final-processing-zone-104346215011/indicador-final/')
 )
+
+
+df_final.show()
