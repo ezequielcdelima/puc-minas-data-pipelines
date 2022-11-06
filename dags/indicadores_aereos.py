@@ -2,7 +2,7 @@ from airflow.decorators import task, dag
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
 from datetime import datetime
-import boto3
+import boto
 
 
 aws_access_key_id = Variable.get('aws_access_key_id')
@@ -57,7 +57,7 @@ def indicadores_aereos():
                         'InstanceCount': 1,
                     }
                 ],
-                'Ec2KeyName': 'none',
+                'Ec2KeyName': 'ce-pucminas-testes',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
                 'Ec2SubnetId': 'subnet-0930242c8c582244d'
