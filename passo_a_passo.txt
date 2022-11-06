@@ -97,8 +97,9 @@ http://a99ceaa1bc99740e5a2535b0769f61ab-820017828.us-east-1.elb.amazonaws.com:80
 user: carlos.ezequiel
 senha: puc@123
 
-22 - cria uma variavel de conexao no airflow chamada my_aws
+22 - cria uma variavel de conexao no airflow chamada my_aws no airflow
 
+23 - cria duas variaveis do Access key ID Secret access key no airflow
 
 99 - deletando o cluster
 eksctl delete cluster --region=us-east-1 --name=kubece
