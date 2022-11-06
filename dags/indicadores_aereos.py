@@ -57,7 +57,7 @@ def indicadores_aereos():
                         'InstanceCount': 1,
                     }
                 ],
-                # 'Ec2KeyName': 'ney-pucminas-testes',
+                'Ec2KeyName': None,
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
                 'Ec2SubnetId': 'subnet-0930242c8c582244d'
