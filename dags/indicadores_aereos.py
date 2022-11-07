@@ -99,20 +99,7 @@ def indicadores_aereos():
                                  's3://emr-code-104346215011/pyspark/job_spark_indicadores_part_1.py'
                                  ]
                     }
-                },
-                {
-                    'Name': 'Processa indicadores aereos parte 2',
-                    'ActionOnFailure': "CONTINUE",
-                    'HadoopJarStep': {
-                        'Jar': 'command-runner.jar',
-                        'Args': ['spark-submit',
-                                 '--master', 'yarn',
-                                 '--deploy-mode', 'cluster',
-                                 's3://emr-code-104346215011/pyspark/job_spark_indicadores_part_2.py'
-                                 ]
-                    }
                 }
-
             ]
         )
         return newstep['StepIds'][0]
