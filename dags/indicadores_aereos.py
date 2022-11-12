@@ -142,6 +142,19 @@ def indicadores_aereos():
         )
 
     @task
+    def wait_emr_job_join(cid: str, stepId: str):
+        waiter = client.get_waiter('step_complete')
+
+        waiter.wait(
+            ClusterId=cid,
+            StepId=stepId,
+            WaiterConfig={
+                'Delay': 10,
+                'MaxAttempts': 600
+            }
+        )
+
+    @task
     def terminate_emr_cluster(cid: str):
         res = client.terminate_job_flows(
             JobFlowIds=[cid]
@@ -164,7 +177,7 @@ def indicadores_aereos():
     indicadores_join = emr_process_aereos_join(cluster)
     wait_step >> indicadores_join
 
-    wait_step_join = wait_emr_job(cluster, indicadores)
+    wait_step_join = wait_emr_job_join(cluster, indicadores_join)
 
     terminacluster = terminate_emr_cluster(cluster)
     wait_step_join >> terminacluster >> fim
