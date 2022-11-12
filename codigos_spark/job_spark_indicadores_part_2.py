@@ -1,4 +1,7 @@
+from pyspark.sql import SparkSession
 from pyspark.sql import functions as f
+
+spark = SparkSession.builder.getOrCreate()
 
 df_indi_result_1 = (
     spark

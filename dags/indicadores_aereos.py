@@ -98,6 +98,7 @@ def indicadores_aereos():
                                  '--deploy-mode', 'cluster',
                                  's3://emr-code-104346215011/pyspark/job_spark_indicadores_part_1.py'
                                  ]
+
                     }
                 }
             ]

@@ -13,8 +13,8 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 
 7 - Armanezando as credenciais da aws na maquina
 aws configure
-AWS Access Key ID [None]: AKIARQS4E4JRQ6FKHIOQ
-AWS Secret Access Key [None]: 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
+AWS Access Key ID [None]: AKIARQS4E4JRSZKW63K6
+AWS Secret Access Key [None]: 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
 Default region name [None]: us-east-1
 Default output format [None]: json
 
@@ -100,6 +100,11 @@ senha: puc@123
 22 - cria uma variavel de conexao no airflow chamada my_aws no airflow
 
 23 - cria duas variaveis do Access key ID Secret access key no airflow
+
+24 - cria a dag que vai gerenciar o cluster
+
+25 - e preciso criar um bucket para guardar o codigo que vai ser executado pelo EMR
+
 
 99 - deletando o cluster
 eksctl delete cluster --region=us-east-1 --name=kubece
