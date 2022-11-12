@@ -82,7 +82,6 @@ def indicadores_aereos():
         return True
 
     # joga o processamento para o EMR dos jobs spark
-
     @task
     def emr_process_aereos(cid: str):
         newstep = client.add_job_flow_steps(

@@ -12,7 +12,9 @@ viagens = (
 
 viagens = (
     viagens
-    .select(f.col('Gender').alias('sexo'),
+    .select(f.col('Id').alias('id'),
+            f.col('Age').alias('idade'),
+            f.col('Gender').alias('sexo'),
             f.col('Type of Travel').alias('tipo_viagem'),
             f.col('Class').alias('classe'),
             f.col('Ease of Online booking').alias('satisfacao_reserva_online'),
@@ -21,26 +23,20 @@ viagens = (
 )
 
 
-viagens.show()
-
-
 df_ind_1 = (
     viagens
     .groupBy('sexo', 'tipo_viagem', 'classe')
     .agg(
-        f.round(f.mean("satisfacao_reserva_online"), 2).alias(
-            "media_satisfacao_reserva_online")
+        f.count("id").alias("qtd_passageiros")
     )
     .orderBy('sexo')
 )
-
 
 df_ind_2 = (
     viagens
     .groupBy('sexo', 'tipo_viagem', 'classe')
     .agg(
-        f.round(f.mean("satisfacao_conforto_assento"), 2).alias(
-            "media_satisfacao_conforto_assento")
+        f.round(f.mean("idade"), 2).alias("media_idade_passageiros")
     )
     .orderBy('sexo')
 )
