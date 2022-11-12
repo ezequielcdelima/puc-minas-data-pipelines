@@ -105,6 +105,28 @@ def indicadores_aereos():
         )
         return newstep['StepIds'][0]
 
+    @task
+    def emr_process_aereos_join(cid: str):
+        newstep = client.add_job_flow_steps(
+            JobFlowId=cid,
+            Steps=[
+                {
+                    'Name': 'Processa indicadores aereos parte 2',
+                    'ActionOnFailure': "CONTINUE",
+                    'HadoopJarStep': {
+                        'Jar': 'command-runner.jar',
+                        'Args': ['spark-submit',
+                                 '--master', 'yarn',
+                                 '--deploy-mode', 'cluster',
+                                 's3://emr-code-104346215011/pyspark/job_spark_indicadores_part_2.py'
+                                 ]
+
+                    }
+                }
+            ]
+        )
+        return newstep['StepIds'][0]
+
     # espera o  step do job terminar
     @task
     def wait_emr_job(cid: str, stepId: str):
@@ -136,6 +158,11 @@ def indicadores_aereos():
 
     indicadores = emr_process_aereos(cluster)
     esperacluster >> indicadores
+
+    wait_step = wait_emr_job(cluster, indicadores)
+
+    indicadores_join = emr_process_aereos_join(cluster)
+    wait_step >> indicadores_join
 
     wait_step = wait_emr_job(cluster, indicadores)
 
