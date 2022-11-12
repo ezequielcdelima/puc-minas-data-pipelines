@@ -164,10 +164,10 @@ def indicadores_aereos():
     indicadores_join = emr_process_aereos_join(cluster)
     wait_step >> indicadores_join
 
-    wait_step = wait_emr_job(cluster, indicadores)
+    wait_step_join = wait_emr_job(cluster, indicadores)
 
     terminacluster = terminate_emr_cluster(cluster)
-    wait_step >> terminacluster >> fim
+    wait_step_join >> terminacluster >> fim
 
 
 execucao = indicadores_aereos()
