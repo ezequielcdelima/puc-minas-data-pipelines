@@ -60,7 +60,7 @@ def indicadores_aereos():
                 'Ec2KeyName': 'ce-pucminas-testes',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
-                'Ec2SubnetId': 'subnet-0930242c8c582244d'
+                'Ec2SubnetId': 'subnet-06b79cf2b18ad4ac4'
             },
 
             Applications=[{'Name': 'Spark'}, {'Name': 'Hive'}],
